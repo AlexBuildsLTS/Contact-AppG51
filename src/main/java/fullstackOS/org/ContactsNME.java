@@ -46,6 +46,18 @@ public boolean addContact(Contact contact) {
         return contacts.removeIf(c -> c.getMobileNumber().equals(mobileNumber));
     }
 
+    public boolean updateContact(String mobileNumber, Contact newContact) {
+        for (Contact c : contacts) {
+            if (c.getMobileNumber().equals(mobileNumber)) {
+                c.setName(newContact.getName());
+                c.setEmail(newContact.getEmail());
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
 
 }
