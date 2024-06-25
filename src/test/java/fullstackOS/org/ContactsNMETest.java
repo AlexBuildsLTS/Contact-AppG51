@@ -17,15 +17,15 @@ public class ContactsNMETest {
 
     @Test
     public void testAddContact() {
-        Contact contact = new Contact("Alice", "1234567890", "alice@example.com");
+        Contact contact = new Contact("alexsandra", "1234567890", "alexsandra@example.com");
         assertTrue(contactsNME.addContact(contact));
         assertFalse(contactsNME.addContact(contact)); // Duplicate mobile number
     }
 
     @Test
     public void testGetAllContacts() {
-        Contact contact1 = new Contact("Alice", "1234567890", "alice@example.com");
-        Contact contact2 = new Contact("Bob", "0987654321", "bob@example.com");
+        Contact contact1 = new Contact("Alex", "1234567890", "alex@gmail.com");
+        Contact contact2 = new Contact("alexsandra", "0987654321", "alexsandra@example.com");
         contactsNME.addContact(contact1);
         contactsNME.addContact(contact2);
 
@@ -35,8 +35,8 @@ public class ContactsNMETest {
 
     @Test
     public void testFindContactsByName() {
-        Contact contact1 = new Contact("Alice", "1234567890", "alice@example.com");
-        Contact contact2 = new Contact("Alice", "0987654321", "alice.b@example.com");
+        Contact contact1 = new Contact("Alex", "1234567890", "Alex@example.com");
+        Contact contact2 = new Contact("Alex", "0987654321", "alex.b@example.com");
         contactsNME.addContact(contact1);
         contactsNME.addContact(contact2);
 
@@ -46,7 +46,7 @@ public class ContactsNMETest {
 
     @Test
     public void testRemoveContactByMobileNumber() {
-        Contact contact = new Contact("Alice", "1234567890", "alice@example.com");
+        Contact contact = new Contact("alex", "1234567890", "alex@example.com");
         contactsNME.addContact(contact);
 
         assertTrue(contactsNME.removeContactByMobileNumber("1234567890"));
@@ -55,14 +55,14 @@ public class ContactsNMETest {
 
     @Test
     public void testUpdateContact() {
-        Contact contact = new Contact("Alice", "1234567890", "alice@example.com");
+        Contact contact = new Contact("Alex", "1234567890", "alex@example.com");
         contactsNME.addContact(contact);
 
-        Contact updatedContact = new Contact("Alice Updated", "1234567890", "alice.updated@example.com");
+        Contact updatedContact = new Contact("Alex Updated", "1234567890", "alex.updated@example.com");
         assertTrue(contactsNME.updateContact("1234567890", updatedContact));
 
         Contact retrievedContact = contactsNME.getAllContacts().get(0);
-        assertEquals("Alice Updated", retrievedContact.getName());
-        assertEquals("alice.updated@example.com", retrievedContact.getEmail());
+        assertEquals("Alex Updated", retrievedContact.getName());
+        assertEquals("Alex.yousef@hotmail.com", retrievedContact.getEmail());
     }
 }
