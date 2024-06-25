@@ -11,7 +11,6 @@ public class Contact {
         this.email = email;
     }
 
-    // Getters and Setters
     public String getName() {
         return name;
     }
@@ -38,10 +37,6 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Contact{" +
-                "name='" + name + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return "Name: " + name + ", Mobile: " + mobileNumber + ", Email: " + email;
     }
 }

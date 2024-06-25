@@ -1,64 +1,62 @@
-package com.yourname.contactlist;
-
-import fullstackOS.org.Contact;
-import fullstackOS.org.ContactsNME;
+package fullstackOS.org;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    private static ContactsNME contactsNME = new ContactsNME();
-    private static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
-        boolean exit = false;
+        ContactNME contactNME = new ContactNME();
+        Scanner scanner = new Scanner(System.in);
+        String command;
 
-        while (!exit) {
-            showMenu();
-            int choice = Integer.parseInt(scanner.nextLine());
+        while (true) {
+            System.out.println("Choose an option: add, getAll, find, remove, update, exit");
+            command = scanner.nextLine();
 
-            switch (choice) {
-                case 1:
-                    addContact();
+            switch (command) {
+                case "add":
+                    System.out.print("Enter name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter mobile number: ");
+                    String mobileNumber = scanner.nextLine();
+                    System.out.print("Enter email: ");
+                    String email = scanner.nextLine();
+                    contactNME.addContact(new Contact(name, mobileNumber, email));
                     break;
-                case 2:
-                    getallcontacts();
+                case "getAll":
+                    List<Contact> contacts = contactNME.getAllContacts();
+                    for (Contact contact : contacts) {
+                        System.out.println(contact);
+                    }
                     break;
-                case 3:
-                    findContactsByName();
+                case "find":
+                    System.out.print("Enter name to find: ");
+                    String findName = scanner.nextLine();
+                    List<Contact> foundContacts = contactNME.findContactsByName(findName);
+                    for (Contact contact : foundContacts) {
+                        System.out.println(contact);
+                    }
                     break;
-                case 4:
-                    removeContactByMobileNumber();
+                case "remove":
+                    System.out.print("Enter mobile number to remove: ");
+                    String removeNumber = scanner.nextLine();
+                    contactNME.removeContactByMobileNumber(removeNumber);
                     break;
-                case 5:
-                    updateContact();
+                case "update":
+                    System.out.print("Enter mobile number to update: ");
+                    String updateNumber = scanner.nextLine();
+                    System.out.print("Enter new name: ");
+                    String newName = scanner.nextLine();
+                    System.out.print("Enter new email: ");
+                    String newEmail = scanner.nextLine();
+                    contactNME.updateContactByMobileNumber(updateNumber, new Contact(newName, updateNumber, newEmail));
                     break;
-                case 6:
-                    exit = true;
-                    break;
+                case "exit":
+                    scanner.close();
+                    return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Invalid option. Try again.");
             }
         }
     }
-
-    private static void showMenu() {
-        System.out.println("Contact List Menu:");
-        System.out.println("1. Add a Contact");
-        System.out.println("2. Get All Contacts");
-        System.out.println("3. Find Contacts by Name");
-        System.out.println("4. Remove a Contact by Mobile Number");
-        System.out.println("5. Update Contact Information by Mobile Number");
-        System.out.println("6. Exit");
-        System.out.print("Enter your choice: ");
-    }
-
-    private static void addContact() {
-        System.out.print("Enter name: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter mobile number: ");
-        String mobileNumber = scanner.nextLine();
-        System.out.print("Enter Email");
-        String email = scanner.nextLine();
-
-        Contact contact = new Contact(name, mobileNumber, email)
+}

@@ -7,62 +7,54 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ContactsNMETest {
-    private ContactsNME contactsNME;
+class ContactsNMETest {
+    private ContactNME contactNME;
 
     @BeforeEach
-    public void setUp() {
-        contactsNME = new ContactsNME();
+    void setUp() {
+        contactNME = new ContactNME();
+        contactNME.addContact(new Contact("Alex Lexicon", "1234567890", "alex@example.com"));
+        contactNME.addContact(new Contact("Jane Smith", "0987654321", "jane@example.com"));
     }
 
     @Test
-    public void testAddContact() {
-        Contact contact = new Contact("alexsandra", "1234567890", "alexsandra@example.com");
-        assertTrue(contactsNME.addContact(contact));
-        assertFalse(contactsNME.addContact(contact)); // Duplicate mobile number
+    void testAddContact() {
+        Contact newContact = new Contact("Alexsandra Brown", "1111111111", "alexsandra@example.com");
+        contactNME.addContact(newContact);
+        assertEquals(3, contactNME.getAllContacts().size());
     }
 
     @Test
-    public void testGetAllContacts() {
-        Contact contact1 = new Contact("Alex", "1234567890", "alex@gmail.com");
-        Contact contact2 = new Contact("alexsandra", "0987654321", "alexsandra@example.com");
-        contactsNME.addContact(contact1);
-        contactsNME.addContact(contact2);
-
-        List<Contact> allContacts = contactsNME.getAllContacts();
-        assertEquals(2, allContacts.size());
+    void testAddDuplicateContact() {
+        Contact duplicateContact = new Contact("Alex Lexicon", "1234567890", "alex.lexicon@example.com");
+        contactNME.addContact(duplicateContact);
+        assertEquals(2, contactNME.getAllContacts().size());
     }
 
     @Test
-    public void testFindContactsByName() {
-        Contact contact1 = new Contact("Alex", "1234567890", "Alex@example.com");
-        Contact contact2 = new Contact("Alex", "0987654321", "alex.b@example.com");
-        contactsNME.addContact(contact1);
-        contactsNME.addContact(contact2);
-
-        List<Contact> contacts = contactsNME.findContactsByName("Alice");
+    void testGetAllContacts() {
+        List<Contact> contacts = contactNME.getAllContacts();
         assertEquals(2, contacts.size());
     }
 
     @Test
-    public void testRemoveContactByMobileNumber() {
-        Contact contact = new Contact("alex", "1234567890", "alex@example.com");
-        contactsNME.addContact(contact);
-
-        assertTrue(contactsNME.removeContactByMobileNumber("1234567890"));
-        assertFalse(contactsNME.removeContactByMobileNumber("1234567890")); // Already removed
+    void testFindContactsByName() {
+        List<Contact> contacts = contactNME.findContactsByName("Alex Lexicon");
+        assertEquals(1, contacts.size());
+        assertEquals("Alex Lexicon", contacts.get(0).getName());
     }
 
     @Test
-    public void testUpdateContact() {
-        Contact contact = new Contact("Alex", "1234567890", "alex@example.com");
-        contactsNME.addContact(contact);
+    void testRemoveContactByMobileNumber() {
+        contactNME.removeContactByMobileNumber("1234567890");
+        assertEquals(1, contactNME.getAllContacts().size());
+    }
 
-        Contact updatedContact = new Contact("Alex Updated", "1234567890", "alex.updated@example.com");
-        assertTrue(contactsNME.updateContact("1234567890", updatedContact));
-
-        Contact retrievedContact = contactsNME.getAllContacts().get(0);
-        assertEquals("Alex Updated", retrievedContact.getName());
-        assertEquals("Alex.yousef@hotmail.com", retrievedContact.getEmail());
+    @Test
+    void testUpdateContactByMobileNumber() {
+        Contact updatedContact = new Contact("Alex Lexicon", "1234567890", "alex.lexicon@example.com");
+        contactNME.updateContactByMobileNumber("1234567890", updatedContact);
+        Contact contact = contactNME.getAllContacts().get(0);
+        assertEquals("alex.lexicon@example.com", contact.getEmail());
     }
 }
