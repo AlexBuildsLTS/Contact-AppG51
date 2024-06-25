@@ -9,4 +9,15 @@ public class ContactsNME {
     public ContactsNME() {
         this.contacts = new ArrayList<>();
     }
+//  added a contact
+public boolean addContact(Contact contact) {
+    for (Contact c : contacts) {
+        if (c.getMobileNumber().equals(contact.getMobileNumber())) {
+            return false; // same mobileNumber
+        }
+    }
+    contacts.add(contact);
+    return true;
+}
+
 }
