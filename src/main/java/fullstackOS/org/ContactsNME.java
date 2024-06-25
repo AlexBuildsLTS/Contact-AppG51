@@ -33,6 +33,19 @@ public boolean addContact(Contact contact) {
         }
         return result;
     }
+    public List<Contact> findContactsByName(String name) {
+        List<Contact> result = new ArrayList<>();
+        for (Contact c : contacts) {
+            if (c.getName().equalsIgnoreCase(name)) {
+                result.add(c);
+            }
+        }
+        return result;
+    }
+    public boolean removeContactByMobileNumber(String mobileNumber) {
+        return contacts.removeIf(c -> c.getMobileNumber().equals(mobileNumber));
+    }
+
 
 
 }
