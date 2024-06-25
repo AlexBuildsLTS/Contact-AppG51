@@ -1,4 +1,4 @@
-package com.yourname.contactlist;
+package FullstackOS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,5 +19,9 @@ public boolean addContact(Contact contact) {
     contacts.add(contact);
     return true;
 }
+
+    public List<Contact> getAllContacts() {
+        return new ArrayList<>(contacts);
+    }
 
 }

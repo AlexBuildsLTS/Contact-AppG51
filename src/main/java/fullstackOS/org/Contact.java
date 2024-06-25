@@ -1,4 +1,4 @@
-package com.yourname.contactlist;
+package fullstackOS.org;
 
 public class Contact {
     private String name;
