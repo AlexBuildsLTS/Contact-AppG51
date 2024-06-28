@@ -1,4 +1,4 @@
-package fullstackOS.org;
+package se.alex.lexicon;
 
 import java.util.List;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package fullstackOS.org;
+package se.alex.lexicon;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
